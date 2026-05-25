@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - GTM Tracking Demo</title>
+    <style>
+        /* Modern, clean layout styling */
+        :root {
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --background: #f9fafb;
+            --card-bg: #ffffff;
+            --text: #111827;
+            --border: #d1d5db;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Parent container with ID for GTM scope */
+        #contact-form-container {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        button {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* CRITICAL TRACKING ELEMENT STYLE */
+        .success {
+            background-color: #ecfdf5;
+            border: 1px solid #10b981;
+            color: #065f46;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+
+        /* Utility helper to toggle elements smoothly */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="contact-form-container">
+        
+        <form id="demo-contact-form">
+            <h2>Send us a message</h2>
+            
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" required placeholder="John Doe">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required placeholder="you@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" rows="4" required placeholder="Your message here..."></textarea>
+            </div>
+
+            <button type="submit">Send message</button>
+        </form>
+
+        <div id="success-message" class="success hidden">
+            Thank you! Your message has been sent successfully.
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('demo-contact-form').addEventListener('submit', function(e) {
+            // 1. Prevent normal browser refresh behavior
+            e.preventDefault();
+
+            // 2. Hide the form fields smoothly
+            this.classList.add('hidden');
+
+            // 3. Unhide the success element inside the DOM
+            // This is what triggers the Element Visibility rules in GTM
+            const successBox = document.getElementById('success-message');
+            successBox.classList.remove('hidden');
+        });
+    </script>
+
+</body>
+</html>
